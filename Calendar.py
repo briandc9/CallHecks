@@ -7,6 +7,9 @@ class Calendar:
     def addEvent(self, event):
         self.events[(event.name, event.date)] = event
         
+    def deleteEvent(self, event):
+        self.events.pop((event.name, event.date))
+        
         
 class Event:
     def _init_(self, name, genre, date, description, price):
@@ -18,6 +21,7 @@ class Event:
         self.all_artists = set()
         self.approved_artists = {}
         self.unapproved_artists = set()
+    
         
     def register(self, artist):
         self.unapproved_artists.add(artist)
@@ -33,8 +37,7 @@ class Event:
         self.approved_artists[artist.name] = 0
         
     def finalizeArtist(self):
-        maximum = max(self.approved_artists.items())
-        inverse = [self.approved_artists.getKey() for maximum in self.approved_artists.items()]
+        inverse = [self.approved_artists.getKey() for max(self.approved_artists.items()) in self.approved_artists.items()]
         return inverse[random.randInt(0, inverse.length)]
     
-    def 
+    

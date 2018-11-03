@@ -19,7 +19,7 @@ import unittest
 from project import users
 
 
-class TestListener(unittest.TestCase):
+class TestArtist(unittest.TestCase):
 
     def testConstructor_correctName(self):
         anant = users.Artist("Anant Sahai", 94704, "I like anime.")

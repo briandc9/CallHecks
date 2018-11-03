@@ -1,5 +1,5 @@
 class Calendar():
-	def _init_(self, events, location):
+	def _init_(self, location):
 		self.events = events
 		self.location = location
         
@@ -9,6 +9,8 @@ class Event(object):
         self.genre = genre
         self.date = date
         self.time = time
+        self.description = description
+        self.price = price
         self.all_artists = set()
         self.approved_artists = {}
         self.unapproved_artists = set()
@@ -19,5 +21,4 @@ class Event(object):
     def approve(self, artist):
         self.unapproved_artists.remove(artist)
         self.approved_artists[artist.name] = 0
-    
     

@@ -13,7 +13,7 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Define Listener, Artist, and Venue objects."""
+"""Define Listener and Artist objects."""
 
 
 class Listener:

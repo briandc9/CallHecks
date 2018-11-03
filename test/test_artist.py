@@ -13,22 +13,23 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Test Listener object implemented in users.py."""
+"""Test Artist object implemented in users.py."""
 import unittest
 
 from project import users
 
 
+# pylint: disable=invalid-name, missing-docstring
 class TestArtist(unittest.TestCase):
 
     def testConstructor_correctName(self):
         anant = users.Artist("Anant Sahai", 94704, "I like anime.")
-        self.assertTrue("Anant Sahai", john)
+        self.assertTrue(anant.name, "Anant Sahai")
 
     def testConstructor_correctZipCode(self):
         anant = users.Artist("Anant Sahai", 94704, "I like anime.")
-        self.assertTrue(94704, anant.zip_code)
+        self.assertTrue(anant.zip_code, 94704)
 
     def testConstructor_correctBiography(self):
         anant = users.Artist("Anant Sahai", 94704, "I like anime.")
-        self.assertTrue("I like anime.", anant.biography)
+        self.assertTrue(anant.biography, "I like anime.")

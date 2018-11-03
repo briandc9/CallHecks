@@ -24,8 +24,8 @@ class TestListener(unittest.TestCase):
 
     def testConstructor_correctName(self):
         john = users.Listener("John DeNero", 94704)
-        self.assertTrue("John DeNero", john)
+        self.assertTrue(john, "John DeNero")
 
     def testConstructor_correctZipCode(self):
         john = users.Listener("John DeNero", 94704)
-        self.assertTrue(94704, john.zip_code)
+        self.assertTrue(john.zip_code, 94704)

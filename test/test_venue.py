@@ -19,16 +19,17 @@ import unittest
 from project import venues
 
 
+# pylint: disable=invalid-name, missing-docstring
 class TestVenue(unittest.TestCase):
 
     def testConstructor_correctName(self):
         club = venues.Venue("Berkeley City Club", "2315 Durant Avenue", 250)
-        self.assertTrue("Berkeley City Club", club.name)
+        self.assertTrue(club.name, "Berkeley City Club")
 
     def testConstructor_correctAddress(self):
         club = venues.Venue("Berkeley City Club", "2315 Durant Avenue", 250)
-        self.assertTrue("2315 Durant Avenue", club.address)
+        self.assertTrue(club.address, "2315 Durant Avenue")
 
     def testConstructor_correctSize(self):
         club = venues.Venue("Berkeley City Club", "2315 Durant Avenue", 250)
-        self.assertTrue(250, club.size)
+        self.assertTrue(club.size, 250)

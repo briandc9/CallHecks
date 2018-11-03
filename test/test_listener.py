@@ -13,12 +13,19 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Define Listener, Artist, and Venue objects."""
+"""Test Listener object implemented in users.py."""
+import unittest
+
+from project import users
 
 
-class Listener:
-    """A user who can vote on artists."""
+# pylint: disable=invalid-name, missing-docstring
+class TestListener(unittest.TestCase):
 
-    def __init__(self, name, zip_code):
-        self.name = name
-        self.zip_code = zip_code
+    def testConstructor_correctName(self):
+        john = users.Listener("John DeNero", 94704)
+        self.assertTrue("John DeNero", john)
+
+    def testConstructor_correctZipCode(self):
+        john = users.Listener("John DeNero", 94704)
+        self.assertTrue(94704, john.zip_code)

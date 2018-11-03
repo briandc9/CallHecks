@@ -6,10 +6,10 @@ class Calendar:
         self.events = {}
         self.location = location
 
-    def addEvent(self, event):
+    def add_event(self, event):
         self.events[(event.name, event.date)] = event
 
-    def deleteEvent(self, event):
+    def delete_event(self, event):
         self.events.pop((event.name, event.date))
 
 
@@ -37,6 +37,11 @@ class Event:
         self.unapproved_artists.remove(artist)
         self.approved_artists[artist.name] = 0
 
-    def finalizeArtist(self):
+    def finalize_artist(self):
         inverse = [self.approved_artists.getKey() for max(self.approved_artists.items()) in self.approved_artists.items()]
         return inverse[random.randInt(0, inverse.length)]
+
+    def __eq__(self, other):
+        if type(other) is not Event:
+            return False
+        return self.name == other.name and self.date == other.date

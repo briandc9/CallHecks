@@ -11,6 +11,8 @@ class Calendar:
 
     def deleteEvent(self, event):
         self.events.pop((event.name, event.date))
+        
+        
 
 
 class Event:

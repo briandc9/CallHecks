@@ -18,8 +18,10 @@ class Event(object):
         else:
             
     def vote(artist):
+        pass
     
     def approve(artist):
+        pass
         
         
         

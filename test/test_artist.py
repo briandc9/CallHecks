@@ -13,26 +13,22 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Define Listener, Artist, and Venue objects."""
+"""Test Listener object implemented in users.py."""
+import unittest
+
+from project import users
 
 
-class Listener:
-    """A user who can vote on artists."""
+class TestListener(unittest.TestCase):
 
-    def __init__(self, name, zip_code):
-        self.name = name
-        self.zip_code = zip_code
+    def testConstructor_correctName(self):
+        anant = users.Artist("Anant Sahai", 94704, "I like anime.")
+        self.assertTrue("Anant Sahai", john)
 
-    def vote(self, artist, event):
-        pass
+    def testConstructor_correctZipCode(self):
+        anant = users.Artist("Anant Sahai", 94704, "I like anime.")
+        self.assertTrue(94704, anant.zip_code)
 
-
-class Artist(Listener):
-    "A user who can apply to perform at an event."
-
-    def __init__(self, name, zip_code, biography):
-        Listener.__init__(self, name, zip_code)
-        self.biography = biography
-
-    def apply(self, event):
-        pass
+    def testConstructor_correctBiography(self):
+        anant = users.Artist("Anant Sahai", 94704, "I like anime.")
+        self.assertTrue("I like anime.", anant.biography)

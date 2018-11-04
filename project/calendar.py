@@ -32,7 +32,7 @@ class Calendar:
         """Add an event to the calendar.
 
         Arguments:
-            event: An Performance object.
+            event: An Event object.
         """
         for other in self.events:
             if event.overlaps(other):
@@ -43,7 +43,7 @@ class Calendar:
         """Remove an event from the calendar.
 
         Arguments:
-            event: An Performance object.
+            event: An Event object.
         """
         self.events.remove(event)
 

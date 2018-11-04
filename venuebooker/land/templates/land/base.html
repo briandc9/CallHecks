@@ -29,7 +29,8 @@
                     <li><a class="waves-effect waves-light btn-flat"  style="margin-right:0px" href="{% url 'profile' %}">Profile</a></li>
                     <li><a class="waves-effect waves-light btn-flat" style="margin-left:0px" href="{% url 'logout' %}">Logout</a></li>
                {% else %}
-                    <li><a class="waves-effect waves-light btn" href="{% url 'login' %}">Sign In</a></li>
+                    <li><a class="waves-effect waves-light btn-flat" style="margin-right:0px" href="{% url 'profile' %}">Sign In</a></li>
+                    <li><a class="waves-effect waves-light btn" href="{% url 'register' %}">Register</a></li>
                {% endif %}
            </ul>
         </div>

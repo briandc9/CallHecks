@@ -20,7 +20,7 @@ import datetime
 class Event:
     """An event of some kind."""
 
-    def __init__(self, name, start_time, duration=180, **metadata):
+    def __init__(self, name, start_time, duration=180):
         """Create a new event.
 
         Arguments:
@@ -28,12 +28,10 @@ class Event:
             genre: A string representing the genre of the event.
             start_time: A datetime object representing start time.
             duration: A number representing the duration of the event in minutes.
-            metadata: A dictionary of supplementary information.
         """
         self.name = name
         self.start_time = start_time
         self.duration = duration
-        self.metadata = metadata
 
     @property
     def end_time(self):
@@ -70,7 +68,7 @@ class Event:
 
 
 class Performance(Event):
-    """An event where users can vote on the performer."""
+    """An event where consumers can vote on the performer."""
 
     def __init__(self, name, start_time, duration=180, **metadata):
         """Create a new performance event.

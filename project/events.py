@@ -13,7 +13,7 @@
 #   limitations under the License.
 #
 # Author: Brian Chin <bchin821@berkeley.edu>
-"""Define Performance objects."""
+"""Define Event objects."""
 import datetime
 
 

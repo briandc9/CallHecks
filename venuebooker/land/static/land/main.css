@@ -1,6 +1,11 @@
 body {
+<<<<<<< HEAD
+    background: #e00404;
+    color: #333333;
+=======
     background: #ffffff;
     color: #ffffff;
+>>>>>>> 194e6aa5c452a8a87d6cab6150300072ff76af61
     margin-top: 5rem;
   }
 

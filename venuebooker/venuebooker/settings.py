@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'land.apps.LandConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'artists'
 ]
 
 MIDDLEWARE = [

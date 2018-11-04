@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Event
+#from project import scheduling as s
 
 events = [
     {
         'name': 'Ye',
+        'concert': 'Final Countdown',
         'performance_date': 'November 4, 2018'
     }
 ]
@@ -12,7 +15,7 @@ events = [
 def home(request):
     #return HttpResponse('<h1>Venue Booker Home</h1>')
     context = {
-        'events': events
+        'events': Event.objects.all()
     }
     return render(request, 'land/home.html', context)
 

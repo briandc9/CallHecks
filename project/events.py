@@ -68,7 +68,7 @@ class Event:
 
 
 class Performance(Event):
-    """An event where users can vote on the performer."""
+    """An event where consumers can vote on the performer."""
 
     def __init__(self, name, start_time, duration=180, **metadata):
         """Create a new performance event.

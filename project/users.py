@@ -13,17 +13,17 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Define User and Performer objects."""
+"""Define Consumer and Performer objects."""
 
 
-class User:
-    """A user who can vote on performers."""
+class Consumer:
+    """A consumer who can vote on performers."""
 
     def __init__(self, name, zip_code):
-        """Create a new user.
+        """Create a new consumer.
 
         Arguments:
-            name: A string representing the full name of the user.
+            name: A string representing the full name of the consumer.
             zip_code: A five digit number.
         """
         self.name = name
@@ -47,31 +47,31 @@ class User:
         return self.name
 
     def __eq__(self, other):
-        if not isinstance(other, User):
+        if not isinstance(other, Consumer):
             return False
         if self is other:
             return True
         return self.name == other.name and self.zip_code == other.zip_code
 
     def __repr__(self):
-        return "User('{0}', {1})".format(self.name, self.zip_code)
+        return "Consumer('{0}', {1})".format(self.name, self.zip_code)
 
     def __hash__(self):
         return hash((self.name, self.zip_code))
 
 
-class Performer(User):
-    "A user who can apply to perform at an event."
+class Performer(Consumer):
+    "A consumer who can apply to perform at an event."
 
     def __init__(self, name, zip_code, biography):
         """Create a new performer.
 
         Arguments:
-            name: A string representing the full name of the user.
+            name: A string representing the full name of the consumer.
             zip_code: A five digit number.
             biography: A string of any length.
         """
-        User.__init__(self, name, zip_code)
+        Consumer.__init__(self, name, zip_code)
         self.biography = biography
 
     def apply_to(self, event):

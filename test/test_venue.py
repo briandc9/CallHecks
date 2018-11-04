@@ -18,7 +18,7 @@ import unittest
 import datetime
 
 from project.venues import Venue
-from project.users import Performer
+from project.consumers import Performer
 from project.events import Performance
 
 

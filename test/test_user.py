@@ -13,24 +13,24 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Test User object implemented in py."""
+"""Test Consumer object implemented in py."""
 import unittest
 import datetime
 
-from project.users import User, Performer
+from project.consumers import Consumer, Performer
 from project.events import Performance
 
 
 # pylint: disable=invalid-name, missing-docstring
-class TestUser(unittest.TestCase):
+class TestConsumer(unittest.TestCase):
 
     def test_constructor(self):
-        john = User("John DeNero", 94704)
+        john = Consumer("John DeNero", 94704)
         self.assertEqual(john.name, "John DeNero")
         self.assertEqual(john.zip_code, 94704)
 
     def test_vote_increments_num_votes(self):
-        john = User("John DeNero", 94704)
+        john = Consumer("John DeNero", 94704)
         anant = Performer("Anant Sahai", 94704, "I reenact anime.")
         rager = Performance("Nathan Trinkl's Birthday Bash",
                             datetime.datetime(18, 3, 16, 9, 55))
@@ -41,7 +41,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(rager.num_votes(anant), 1)
 
     def test_vote_works_correctly_when_vote_changes(self):
-        john = User("John DeNero", 94704)
+        john = Consumer("John DeNero", 94704)
         anant = Performer("Anant Sahai", 94704, "I reenact anime.")
         rager = Performance("Nathan Trinkl's Birthday Bash",
                             datetime.datetime(18, 3, 16, 9, 55))
@@ -57,7 +57,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(rager.num_votes(paul), 1)
 
     def test_vote_works_with_multiple_events(self):
-        john = User("John DeNero", 94704)
+        john = Consumer("John DeNero", 94704)
         anant = Performer("Anant Sahai", 94704, "I reenact anime.")
         paul = Performer("Paul Hilfinger", 94704, "I sing opera.")
         rager = Performance("Nathan Trinkl's Birthday Bash",
@@ -74,16 +74,16 @@ class TestUser(unittest.TestCase):
         self.assertEqual(concert.num_votes(paul), 1)
 
     def test_str(self):
-        john = User("John DeNero", 94704)
+        john = Consumer("John DeNero", 94704)
         self.assertEqual(str(john), "John DeNero")
 
     def test_eq(self):
-        john1 = User("John DeNero", 94704)
-        john2 = User("John DeNero", 94704)
+        john1 = Consumer("John DeNero", 94704)
+        john2 = Consumer("John DeNero", 94704)
         self.assertEqual(john1, john2)
         anant = Performer("Anant Sahai", 94704, "I reenact anime.")
         self.assertNotEqual(john1, anant)
 
     def test_repr(self):
-        john = User("John DeNero", 94704)
-        self.assertEqual(repr(john), "User('John DeNero', 94704)")
+        john = Consumer("John DeNero", 94704)
+        self.assertEqual(repr(john), "Consumer('John DeNero', 94704)")

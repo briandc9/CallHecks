@@ -17,7 +17,7 @@
 import unittest
 import datetime
 
-from project.users import Performer
+from project.consumers import Performer
 from project.events import Performance
 
 

@@ -15,7 +15,7 @@ events = [
 def home(request):
     #return HttpResponse('<h1>Venue Booker Home</h1>')
     context = {
-        'events': Event.objects.all()
+        'events': Event.objects.all().sort_by('performance_date')
     }
     return render(request, 'land/home.html', context)
 

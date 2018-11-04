@@ -17,6 +17,11 @@
     margin-right: 15px;
 }
 
+.overflows {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
 .overlay {
   opacity: 1;
   transition: .5s ease;

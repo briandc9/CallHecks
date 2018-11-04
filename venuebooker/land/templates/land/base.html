@@ -1,5 +1,5 @@
 {% load static %}
-<html>
+<html class="overflows">
     {% load staticfiles %}
     <script type="text/javascript" src="{% static 'land/js/materialize.js' %}"></script>
     <head>
@@ -18,14 +18,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'land/main.css' %}">
 
     <title>Songbird</title>
-    
+
     <nav>
         <div class="nav-wrapper white">
            <a href="/">
                <img src="{% static 'land/image.jpg' %}" class="logo left overlay">
            </a>
            <ul class="right hide-on-med-and-down">
-               <li><a class="waves-effect waves-light btn">Sign In</a></li>
+               {% if user.is_authenticated %}
+                    <li><a class="waves-effect waves-light btn-flat"  style="margin-right:0px" href="{% url 'profile' %}">Profile</a></li>
+                    <li><a class="waves-effect waves-light btn-flat" style="margin-left:0px" href="{% url 'logout' %}">Logout</a></li>
+               {% else %}
+                    <li><a class="waves-effect waves-light btn" href="{% url 'login' %}">Sign In</a></li>
+               {% endif %}
            </ul>
         </div>
     </nav>

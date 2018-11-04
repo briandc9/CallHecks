@@ -13,45 +13,8 @@
 #   limitations under the License.
 #
 # Author: Brian Chin <bchin821@berkeley.edu>
-"""Define Calendar and Event objects."""
+"""Define Performance objects."""
 import datetime
-
-
-class Calendar:
-    """A collection of events for a particular location."""
-
-    def __init__(self, zip_codes):
-        """Initialize a calendar for some location.
-
-        Arguments:
-            zip_codes: A collection of five-digit numbers.
-        """
-        self.events = set()
-        self.zip_codes = zip_codes
-
-    def add(self, event):
-        """Add an event to the calendar.
-
-        Arguments:
-            event: An Event object.
-        """
-        for other in self.events:
-            if event.overlaps(other):
-                raise ValueError("Event times conflict.")
-        self.events.add(event)
-
-    def remove(self, event):
-        """Remove an event from the calendar.
-
-        Arguments:
-            event: An Event object.
-        """
-        self.events.remove(event)
-
-    @property
-    def size(self):
-        """Return number of events in the calendar."""
-        return len(self.events)
 
 
 class Event:
@@ -71,10 +34,63 @@ class Event:
         self.start_time = start_time
         self.duration = duration
         self.metadata = metadata
-        # Internal attributes
+
+    @property
+    def end_time(self):
+        """Return the time at which the event ends.
+
+        Returns:
+            A datetime object.
+        """
+        return self.start_time + datetime.timedelta(minutes=self.duration)
+
+    def __eq__(self, other):
+        if not isinstance(other, Performance):
+            return False
+        if self is other:
+            return True
+        return self.name == other.name and self.start_time == other.start_time
+
+    def __hash__(self):
+        return hash(self.start_time)
+
+    def overlaps(self, event):
+        """Return true if this event overlaps with the given event.
+
+        Arguments:
+            event: An Performance object.
+        """
+        starts_after_event_starts = self.start_time > event.start_time
+        starts_before_event_ends = self.start_time < event.end_time
+        ends_after_event_starts = self.end_time > event.start_time
+        ends_before_event_ends = self.end_time < event.end_time
+        start_overlaps = starts_after_event_starts and starts_before_event_ends
+        end_overlaps = ends_after_event_starts and ends_before_event_ends
+        return start_overlaps or end_overlaps
+
+
+class Performance(Event):
+    """An event where users can vote on the performer."""
+
+    def __init__(self, name, start_time, duration=180, **metadata):
+        """Create a new performance event.
+
+        Arguments:
+            name: A string representing the name of the event.
+            genre: A string representing the genre of the event.
+            start_time: A datetime object representing start time.
+            duration: A number representing the duration of the event in minutes.
+            metadata: A dictionary of supplementary information.
+        """
+        Event.__init__(self, name, start_time, duration, **metadata)
         self.votes = {}
         self.approved_performers = set()
         self.unapproved_performers = set()
+        self.is_accepting_votes = True
+
+    def num_votes(self, performer):
+        """Return the number of votes for an performer."""
+        return self.votes.get(performer, 0)
 
     def register(self, performer):
         """Add performer to collection of performers-to-be-aproved.
@@ -93,6 +109,8 @@ class Event:
         Raises:
             ValueError: If performer has not been aproved yet.
         """
+        if not self.is_accepting_votes:
+            raise ValueError("Event is no longer accepting votes.")
         if performer not in self.approved_performers:
             raise ValueError("Performer has not been aproved yet.")
         self.votes[performer] += 1
@@ -106,6 +124,8 @@ class Event:
         Raises:
             ValueError: If the performer has never been voted for.
         """
+        if not self.is_accepting_votes:
+            raise ValueError("Event is no longer accepting votes.")
         if self.num_votes(performer) == 0:
             raise ValueError("Performer already has zero votes.")
         self.votes[performer] -= 1
@@ -130,6 +150,10 @@ class Event:
         self.approved_performers.add(performer)
         self.votes[performer] = 0
 
+    def close_voting(self):
+        """Prevent event from accepting more votes."""
+        self.is_accepting_votes = False
+
     @property
     def performer(self):
         """Return the performer with the most votes.
@@ -138,40 +162,3 @@ class Event:
             An Performer instance.
         """
         return max(self.votes, key=lambda performer: self.votes[performer])
-
-    @property
-    def end_time(self):
-        """Return the time at which the event ends.
-
-        Returns:
-            A datetime object.
-        """
-        return self.start_time + datetime.timedelta(minutes=self.duration)
-
-    def __eq__(self, other):
-        if not isinstance(other, Event):
-            return False
-        if self is other:
-            return True
-        return self.name == other.name and self.start_time == other.start_time
-
-    def __hash__(self):
-        return hash(self.start_time)
-
-    def num_votes(self, performer):
-        """Return the number of votes for an performer."""
-        return self.votes.get(performer, 0)
-
-    def overlaps(self, event):
-        """Return true if this event overlaps with the given event.
-
-        Arguments:
-            event: An Event object.
-        """
-        starts_after_event_starts = self.start_time > event.start_time
-        starts_before_event_ends = self.start_time < event.end_time
-        ends_after_event_starts = self.end_time > event.start_time
-        ends_before_event_ends = self.end_time < event.end_time
-        start_overlaps = starts_after_event_starts and starts_before_event_ends
-        end_overlaps = ends_after_event_starts and ends_before_event_ends
-        return start_overlaps or end_overlaps

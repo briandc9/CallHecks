@@ -34,11 +34,11 @@ class Venue:
         """Add the given event to the venue's list of events.
 
         Arguments:
-            events: An Event instance
+            events: An Performance instance
         """
         for other in self.events:
             if event.overlaps(other):
-                raise ValueError("Event times conflict.")
+                raise ValueError("Performance times conflict.")
         self.events.append(event)
 
     def approve(self, performer, event):
@@ -46,7 +46,7 @@ class Venue:
 
         Arguments:
             performer: A Performer instance.
-            event: An Event instance.
+            event: An Performance instance.
 
         Raises:
             ValueError: If venue is not hosting the event.

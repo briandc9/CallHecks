@@ -46,7 +46,7 @@ class Venue:
 
         Arguments:
             performer: A Performer instance.
-            event: An Performance instance.
+            event: An Event instance.
 
         Raises:
             ValueError: If venue is not hosting the event.

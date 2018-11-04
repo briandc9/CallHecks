@@ -1,110 +1,49 @@
 {% load static %}
 <html>
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'land/js/materialize.js' %}"></script>
     <head>
-        <!-- Required meta tags -->
-        {% load staticfiles %}
-        <link rel='stylesheet' href="{% static 'land/css/materialize.min.css' %}" type='text/css'/>
-        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel='stylesheet' href="{% static 'land/css/materialize.css' %}" type='text/css'/>
+    <link rel='stylesheet' href="{% static 'land/main.css' %}" type='text/css'/>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{% static 'land/main.css' %}">
-        <title>Venux</title>
+    <!-- Initialize metadata -->
+    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" ref="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'land/main.css' %}">
+
+    <title>Songbird</title>
+
+    <nav>
+        <div class="nav-wrapper white">
+           <a href="/">
+               <img src="{% static 'land/image.jpg' %}" class="logo left overlay">
+           </a>
+           <ul class="right hide-on-med-and-down">
+               <li><a class="waves-effect waves-light btn">Sign In</a></li>
+           </ul>
+        </div>
+    </nav>
     </head>
+
     <body>
-        <header class="site-header">
-            <nav class="navbar navbar-expand-md white fixed-top">
-                <div class="container">
-                    <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="{% url 'booker-home' %}">HOME</a>
-                        <a class="nav-item nav-link" href="{% url 'booker-about' %}">ABOUT</a>
-                    </div>
-                    <!-- Navbar Right Side -->
-                    <div class="navbar-nav">
-                        {% if user.is_authenticated %}
-                            <a class="waves-effect waves-light btn" href="{% url 'profile' %}">Profile</a>
-                            <a class="waves-effect waves-light btn" href="{% url 'logout' %}">Logout</a>
-                        {% else %}
-                            <a class="waves-effect waves-light btn" href="{% url 'login' %}">Sign In</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-
-
-
         <main role="main" class="container">
-
-
-            <div class="row">
-                <div class="col-md-8">
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{message}}
-                    </div>
-                    {% endfor %}
-                {% endif %}
+        <div class="row">
+            <div class="col-md-8">
                 {% block content %}{% endblock %}
-                </div>
-                <div class="col-md-4">
-                <div class="content-section" align="right">
-                    <h3>Information</h3>
-                    <p class='text-muted'>Check out what's hot in Berkeley!
-                    <ul class="list-group">
-
-
-                        <li class="list-group-item list-group-item-light">Listings</li>
-                        <li class="list-group-item list-group-item-light">Your Events</li>
-                        <li class="list-group-item list-group-item-light">Your History</li>
-                    </ul>
-                    </p>
-                </div>
-                </div>
             </div>
-
-
-
-
-
-
-
-        </main>
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <footer>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-bottom">
-                <div class="container">
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{% url 'booker-home' %}">Facebook</a>
-                    <a class="nav-item nav-link" href="{% url 'booker-about' %}">Twitter</a>
-                    </div>
-                    <!-- Navbar Right Side -->
-                    <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#">Report Bug</a>
-                    </div>
-                </div>
-                </div>
-            </nav>
-    </footer>
-
+        </div>
     </body>
 
-
-
+    <footer class="page-footer white oof" style="background-color:white">
+        <div class="container oof overlay" style="color:bbbfc2;background-color:white">
+            © 2018 Company
+            <a class="right oof overlay" href="#!" style="color:bbbfc2;background-color:white">More Links</a>
+        </div>
+    </footer>
 </html>

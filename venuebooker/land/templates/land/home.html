@@ -2,29 +2,23 @@
 
 {%block content%}
     {% for event in events %}
-    <article class="media content-section">
+    <!--<p class="article-content">{{ post.content }}</p>-->
+    <div class="row">
+        <div class="col s12 m6" style="width:600px; margin-left:100px">
+            <div class="card" style="margin-top:20px; margin-bottom:-15px">
+                <div class>
+                    <ul class="hide-on-med-and-down" style="margin-right:0">
+                        <li><a class="left waves-effect waves-light btn-flat large" style="margin-bottom:5px; margin-top:6px"><b style="font-size:16">{{ event.concert }}</b></a></li>
+                        <li class="right"><i class="material-icons" style="margin-right:10px; margin-top:12px">library_music</i></li>
+                    </ul>
+                </div>
+                <div class="card-image">
+                    <img style="height:400px" src="https://amp.businessinsider.com/images/56c63ff78a45652241f6fed9-750-539.jpg">
+                    <span class="card-title"> {{event.performance_date|date:"F d, Y"}}</span>
+                </div>
 
-
-
-
-
-        <div class="media-body">
-            <div class="article-metadata">
-            <a class="mr-2" href="#"> Performing on {{event.performance_date|date:"F d, Y"}}</a>
-            <h2><a class="article-title" href="#"> <a class="mt-0" href="#">{{ event.name }}</a></a></h2>
-            
-            <img src="https://nyppagesix.files.wordpress.com/2018/10/181027-west-shirts.jpg" alt="W3Schools.com" style="width:200px;height:142px;">
-            <!--<small class="text-muted">{{ post.date_posted }}</small>--> 
-            </div>
-            <h2><a class="article-title" href="#"> {{event.concert}} by {{ event.name }} </a></h2>
-            <!--<p class="article-content">{{ post.content }}</p>-->
+             </div>
         </div>
-    </article>
-
-    <!--
-    <h3>{{event.name}}</h3>
-    <p>Performing on {{event.performance_date}}</p>
-    -->
-    
+    </div>
     {% endfor %}
 {%endblock content%}

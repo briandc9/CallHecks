@@ -15,21 +15,72 @@
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
 """Test Venue object implemented in venues.py."""
 import unittest
+import datetime
 
 from project import venues
+from project import users
+from project import scheduling
 
 
 # pylint: disable=invalid-name, missing-docstring
 class TestVenue(unittest.TestCase):
 
-    def testConstructor_correctName(self):
-        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue", 250)
+    def test_constructor(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
         self.assertTrue(club.name, "Berkeley City Club")
-
-    def testConstructor_correctAddress(self):
-        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue", 250)
         self.assertTrue(club.address, "2315 Durant Avenue")
 
-    def testConstructor_correctSize(self):
-        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue", 250)
-        self.assertTrue(club.size, 250)
+    def test_host(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        rager = scheduling.Event("Nathan Trinkl's Birthday Bash",
+                                 datetime.datetime(18, 3, 16, 9, 55))
+        self.assertTrue(rager not in club.events)
+        club.host(rager)
+        self.assertTrue(rager in club.events)
+
+    def test_host_overlapping_events(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        rager = scheduling.Event("Steven Huangs's Birthday Bash",
+                                 datetime.datetime(18, 3, 16, 9, 45))
+        rave = scheduling.Event(
+            "Japanese Pop Rave",
+            rager.start_time + datetime.timedelta(minutes=10))
+        club.host(rager)
+        with self.assertRaises(ValueError):
+            club.host(rave)
+
+    def test_approve(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        anant = users.Performer("Anant Sahai", 94704, "I reenact animes.")
+        rager = scheduling.Event("Nathan Trinkl's Birthday Bash",
+                                 datetime.datetime(18, 3, 16, 9, 55))
+        club.host(rager)
+        anant.apply_to(rager)
+        self.assertTrue(anant not in rager.approved_performers)
+        club.approve(anant, rager)
+        self.assertTrue(anant in rager.approved_performers)
+
+    def test_approve_for_not_hosted_event(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        anant = users.Performer("Anant Sahai", 94704, "I reenact animes.")
+        rager = scheduling.Event("Nathan Trinkl's Birthday Bash",
+                                 datetime.datetime(18, 3, 16, 9, 55))
+        anant.apply_to(rager)
+        with self.assertRaises(ValueError):
+            club.approve(anant, rager)
+
+    def test_str(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        self.assertEqual(str(club), "Berkeley City Club")
+
+    def test_repr(self):
+        club = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        self.assertEqual(
+            repr(club), "Venue('Berkeley City Club', '2315 Durant Avenue')")
+
+    def test_eq(self):
+        club1 = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        club2 = venues.Venue("Berkeley City Club", "2315 Durant Avenue")
+        self.assertEqual(club1, club2)
+        hall = venues.Venue("Carnegie Hall", "6124 Jefferson Street")
+        self.assertNotEqual(club1, hall)

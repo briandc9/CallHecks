@@ -13,26 +13,75 @@
 #   limitations under the License.
 #
 # Author: Balaji Veeramani <bveeramani@berkeley.edu>
-"""Define Listener and Artist objects."""
+"""Define User and Performer objects."""
 
 
-class Listener:
-    """A user who can vote on artists."""
+class User:
+    """A user who can vote on performers."""
 
     def __init__(self, name, zip_code):
+        """Create a new user.
+
+        Arguments:
+            name: A string representing the full name of the user.
+            zip_code: A five digit number.
+        """
         self.name = name
         self.zip_code = zip_code
+        self.vote_history = {}
 
-    def vote(self, artist, event):
-        pass
+    def vote_for(self, performer, event):
+        """Vote for a performer for a particular event.
+
+        Arguments:
+            performer: A Performer object.
+            event: An Event object.
+        """
+        if event in self.vote_history:
+            most_recent_vote = self.vote_history[event]
+            event.downvote(most_recent_vote)
+        event.upvote(performer)
+        self.vote_history[event] = performer
+
+    def __str__(self):
+        return self.name
+
+    def __eq__(self, other):
+        if not isinstance(other, User):
+            return False
+        if self is other:
+            return True
+        return self.name == other.name and self.zip_code == other.zip_code
+
+    def __repr__(self):
+        return "User('{0}', {1})".format(self.name, self.zip_code)
+
+    def __hash__(self):
+        return hash((self.name, self.zip_code))
 
 
-class Artist(Listener):
+class Performer(User):
     "A user who can apply to perform at an event."
 
     def __init__(self, name, zip_code, biography):
-        Listener.__init__(self, name, zip_code)
+        """Create a new performer.
+
+        Arguments:
+            name: A string representing the full name of the user.
+            zip_code: A five digit number.
+            biography: A string of any length.
+        """
+        User.__init__(self, name, zip_code)
         self.biography = biography
 
-    def apply(self, event):
-        pass
+    def apply_to(self, event):
+        """Apply to perform at an event.
+
+        Arguments:
+            event: An Event object.
+        """
+        event.register(self)
+
+    def __repr__(self):
+        return "Performer('{0}', {1}, '{2}')".format(self.name, self.zip_code,
+                                                     self.biography)

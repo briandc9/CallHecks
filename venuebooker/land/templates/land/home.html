@@ -3,11 +3,7 @@
 {%block content%}
     {% for event in events %}
     <article class="media content-section">
-
-
-
-
-
+        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
         <div class="media-body">
             <div class="article-metadata">
             <a class="mr-2" href="#"> Performing on {{event.performance_date|date:"F d, Y"}}</a>

@@ -7,11 +7,6 @@
     width: height;
 }
 
-.overflows {
-    overflow: -moz-scrollbars-vertical;
-    overflow-y: scroll;
-}
-
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .navigation-button {

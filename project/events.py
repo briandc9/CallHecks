@@ -58,7 +58,7 @@ class Event:
         """Return true if this event overlaps with the given event.
 
         Arguments:
-            event: An Performance object.
+            event: An Event object.
         """
         starts_after_event_starts = self.start_time > event.start_time
         starts_before_event_ends = self.start_time < event.end_time

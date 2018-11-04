@@ -35,7 +35,7 @@ class User:
 
         Arguments:
             performer: A Performer object.
-            event: An Event object.
+            event: An Performance object.
         """
         if event in self.vote_history:
             most_recent_vote = self.vote_history[event]
@@ -78,7 +78,7 @@ class Performer(User):
         """Apply to perform at an event.
 
         Arguments:
-            event: An Event object.
+            event: An Performance object.
         """
         event.register(self)
 

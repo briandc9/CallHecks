@@ -13,7 +13,13 @@
                     </ul>
                 </div>
                 <div class="card-image">
-                    <img style="height:400px" src="https://amp.businessinsider.com/images/56c63ff78a45652241f6fed9-750-539.jpg">
+                    <div class="overlay4">
+                        <div class="div1">
+                            <a href="{% url 'profile' %}"><img style="height:400px" src="https://amp.businessinsider.com/images/56c63ff78a45652241f6fed9-750-539.jpg" class="fwomp"></a>
+
+                        </div>
+                    </div>
+
                     <span class="card-title"> {{event.performance_date|date:"F d, Y"}}</span>
                 </div>
              </div>
